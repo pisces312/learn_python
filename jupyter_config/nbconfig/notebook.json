@@ -12,7 +12,8 @@
   },
   "Cell": {
     "cm_config": {
-      "lineNumbers": true
+      "lineNumbers": true,
+      "lineWrapping": true
     }
   },
   "Notebook": {
