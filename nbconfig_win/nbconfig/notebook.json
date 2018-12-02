@@ -1,0 +1,39 @@
+{
+  "keys": {
+    "command": {
+      "unbind": [
+        "s"
+      ],
+      "bind": {
+        "ctrl-shift-f": "code_prettify:process_selected_cells"
+      }
+    }
+  },
+  "Notebook": {
+    "Toolbar": true,
+    "Header": true
+  },
+  "load_extensions": {
+    "toc2/main": true,
+    "codefolding/main": true,
+    "code_font_size/code_font_size": true,
+    "varInspector/main": true,
+    "help_panel/help_panel": false,
+    "keyboard_shortcut_editor/main": true,
+    "nbextensions_configurator/config_menu/main": true,
+    "init_cell/main": true,
+    "execute_time/ExecuteTime": true,
+    "code_prettify/code_prettify": true,
+    "autosavetime/main": false,
+    "runtools/main": false,
+    "hide_input_all/main": true,
+    "contrib_nbextensions_help_item/main": true
+  },
+  "help_panel_add_toolbar_button": true,
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": true,
+      "lineWrapping": true
+    }
+  }
+}

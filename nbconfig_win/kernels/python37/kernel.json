@@ -1,0 +1,12 @@
+{
+ "display_name": "Python 3.7.0",
+ "language": "python",
+ "argv": [
+  "C:/dev/miniconda/python.exe",
+  "-m",
+  "ipykernel",
+  "--HistoryManager.enabled=False",
+  "-f",
+  "{connection_file}"
+ ] 
+}

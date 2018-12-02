@@ -1,8 +1,30 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
+# JetBrains files
+**/.idea/
+*.iml
+
+# Eclipse files
+.project
+.pydevproject
+
+# Build files
+**/target/
+**/test_output/
+__version__.py
+**/*.egg-info/
+**/dist/
+
 *.py[cod]
 *$py.class
+**/__pycache__/
 
+.ipynb_checkpoints
+**/.ipynb_checkpoints/**
+
+spark-warehouse
+
+**/migrate
+
+##############################
 # C extensions
 *.so
 
@@ -97,5 +119,3 @@ ENV/
 # mkdocs documentation
 /site
 
-# mypy
-.mypy_cache/

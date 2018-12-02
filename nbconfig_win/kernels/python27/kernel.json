@@ -1,0 +1,12 @@
+{
+ "display_name": "Python 2.7.15", 
+ "language": "python", 
+ "argv": [
+  "C:/nili/dev/miniconda3/envs/py2/python", 
+  "-m", 
+  "ipykernel",
+  "--HistoryManager.enabled=False",
+  "-f", 
+  "{connection_file}"
+ ]
+}

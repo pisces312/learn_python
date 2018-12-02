@@ -5,8 +5,7 @@
 #------------------------------------------------------------------------------
 
 ## This is an application.
-import os
-print("reading config file from "+os.getcwd())
+
 ## The date format used by logging formatters for %(asctime)s
 #c.Application.log_datefmt = '%Y-%m-%d %H:%M:%S'
 
@@ -75,6 +74,15 @@ print("reading config file from "+os.getcwd())
 #  standard library module, which allows setting of the BROWSER environment
 #  variable to override it.
 #c.NotebookApp.browser = ''
+
+print("reading config file")
+
+import webbrowser
+webbrowser.register('firefox', None, webbrowser.GenericBrowser(u'C:\\Program Files\\Mozilla Firefox\\firefox.exe'))
+#webbrowser.register('firefox', None, webbrowser.GenericBrowser(u'C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe'))
+webbrowser.register('chrome', None, webbrowser.GenericBrowser(u'C:\\Users\\nili6\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe'))
+#c.NotebookApp.browser = 'firefox'
+c.NotebookApp.browser = 'chrome'
 
 ## The full path to an SSL/TLS certificate file.
 #c.NotebookApp.certfile = ''
@@ -151,8 +159,8 @@ print("reading config file from "+os.getcwd())
 #  recompilation
 #c.NotebookApp.ignore_minified_js = False
 
-## (bytes/sec) Maximum rate at which messages can be sent on iopub before they
-#  are limited.
+## (bytes/sec) Maximum rate at which stream output can be sent on iopub before
+#  they are limited.
 #c.NotebookApp.iopub_data_rate_limit = 1000000
 
 ## (msgs/sec) Maximum rate at which messages can be sent on iopub before they are
@@ -219,7 +227,7 @@ print("reading config file from "+os.getcwd())
 
 ## Forces users to use a password for the Notebook server. This is useful in a
 #  multi user environment, for instance when everybody in the LAN can access each
-#  other's machine though ssh.
+#  other's machine through ssh.
 #  
 #  In such a case, server the notebook server on localhost is not secure since
 #  any user can connect to the notebook server via ssh.
@@ -272,6 +280,25 @@ print("reading config file from "+os.getcwd())
 
 ## DEPRECATED, use tornado_settings
 #c.NotebookApp.webapp_settings = {}
+
+## Specify Where to open the notebook on startup. This is the
+#  `new` argument passed to the standard library method `webbrowser.open`.
+#  The behaviour is not guaranteed, but depends on browser support. Valid
+#  values are:
+#      2 opens a new tab,
+#      1 opens a new window,
+#      0 opens in an existing window.
+#  See the `webbrowser.open` documentation for details.
+#c.NotebookApp.webbrowser_open_new = 2
+
+## Set the tornado compression options for websocket connections.
+#  
+#  This value will be returned from
+#  :meth:`WebSocketHandler.get_compression_options`. None (default) will disable
+#  compression. A dict (even an empty one) will enable compression.
+#  
+#  See the tornado docs for WebSocketHandler.get_compression_options for details.
+#c.NotebookApp.websocket_compression_options = None
 
 ## The base URL for websockets, if it differs from the HTTP server (hint: it
 #  almost certainly doesn't).
@@ -451,6 +478,34 @@ print("reading config file from "+os.getcwd())
 
 ## A KernelManager that handles notebook mapping and HTTP error handling
 
+## Whether messages from kernels whose frontends have disconnected should be
+#  buffered in-memory.
+#  
+#  When True (default), messages are buffered and replayed on reconnect, avoiding
+#  lost messages due to interrupted connectivity.
+#  
+#  Disable if long-running kernels will produce too much output while no
+#  frontends are connected.
+#c.MappingKernelManager.buffer_offline_messages = True
+
+## Whether to consider culling kernels which are busy. Only effective if
+#  cull_idle_timeout is not 0.
+#c.MappingKernelManager.cull_busy = False
+
+## Whether to consider culling kernels which have one or more connections. Only
+#  effective if cull_idle_timeout is not 0.
+#c.MappingKernelManager.cull_connected = False
+
+## Timeout (in seconds) after which a kernel is considered idle and ready to be
+#  culled.  Values of 0 or lower disable culling. The minimum timeout is 300
+#  seconds (5 minutes). Positive values less than the minimum value will be set
+#  to the minimum.
+#c.MappingKernelManager.cull_idle_timeout = 0
+
+## The interval (in seconds) on which to check for idle kernels exceeding the
+#  cull timeout value.
+#c.MappingKernelManager.cull_interval = 300
+
 ## 
 #c.MappingKernelManager.root_dir = ''
 
@@ -480,6 +535,23 @@ print("reading config file from "+os.getcwd())
 
 ## 
 #c.ContentsManager.checkpoints_kwargs = {}
+
+## handler class to use when serving raw file requests.
+#  
+#  Default is a fallback that talks to the ContentsManager API, which may be
+#  inefficient, especially for large files.
+#  
+#  Local files-based ContentsManagers can use a StaticFileHandler subclass, which
+#  will be much more efficient.
+#  
+#  Access to these files should be Authenticated.
+#c.ContentsManager.files_handler_class = 'notebook.files.handlers.FilesHandler'
+
+## Extra parameters to pass to files_handler_class.
+#  
+#  For example, StaticFileHandlers generally expect a `path` argument specifying
+#  the root directory from which to serve files.
+#c.ContentsManager.files_handler_params = {}
 
 ## Glob patterns to hide in file and directory listings.
 #c.ContentsManager.hide_globs = ['__pycache__', '*.pyc', '*.pyo', '.DS_Store', '*.so', '*.dylib', '*~']
@@ -577,6 +649,9 @@ print("reading config file from "+os.getcwd())
 #  be in your Jupyter data directory. You can set it to ':memory:' to disable
 #  sqlite writing to the filesystem.
 #c.NotebookNotary.db_file = ''
+
+# if set to memory, it will not remember trusted notebook
+# c.NotebookNotary.db_file = ':memory:'
 
 ## The secret key with which notebooks are signed.
 #c.NotebookNotary.secret = b''
